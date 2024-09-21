@@ -16,7 +16,10 @@ pipeline {
 
         stage('Unit Test') {
             steps {
-                 bat 'echo docker Unit Test'
+                //sh 'mvn test'
+                bat 'mvn test'
+                //sh 'echo docker Unit Test'
+                bat 'echo docker Unit Test'
             }
         }
 
