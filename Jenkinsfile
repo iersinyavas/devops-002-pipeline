@@ -50,9 +50,7 @@ pipeline {
 
         stage('Docker Image to Clean') {
              steps {
-                  cript{
-                            kubernetesDeploy (configs: 'deployment-service.yml', kubeconfigId: 'kubernetes')
-                  }
+                  bat 'echo Docker Image to Clean'
              }
         }
     }
