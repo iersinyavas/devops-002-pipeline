@@ -5,54 +5,41 @@ pipeline {
         jdk 'JDK17'
         maven 'Maven3'
     }
-
     stages {
         stage('Build Maven') {
             steps {
-            checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/iersinyavas/devops-002-pipeline']])
-
-            // sh 'mvn clean install'
-             bat 'mvn clean install'
+                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/mimaraslan/devops-002-pipeline']])
+                bat 'mvn clean install'
+                //sh 'mvn clean install'  macOS, Linux için
             }
         }
-
 
         stage('Docker Image') {
             steps {
-            // sh 'docker build  -t iersinyavas/my-application  .'
-            // bat 'docker build  -t iersinyavas/my-application  .'
-               bat 'docker build  -t iersinyavas/my-application:latest  .'
+
+                bat 'docker build -t iersinyavas/my-application:latest .'
+                //sh 'docker build -t iersinyavas/my-application .'   macOS, Linux için
             }
         }
 
-
         stage('Docker Image to DockerHub') {
             steps {
-              script{
+                script{
                     withCredentials([string(credentialsId: 'dockerHub', variable: 'dockerHub')]) {
-
-                        // bat 'docker login -u iersinyavas -p DOCKERHUB_TOKEN'
-
-                         // sh 'echo docker login -u iersinyavas -p ${dockerhub}'
-                          bat 'echo docker login -u iersinyavas -p ${dockerhub}'
-
-                        // sh 'docker image push  iersinyavas/my-application:latest'
-                          bat 'docker image push  iersinyavas/my-application:latest'
-
+                        //bat 'docker login -u iersinyavas -p DOCKER_HUB'
+                        bat 'echo docker login -u iersinyavas -p ${dockerHub}'
+                        bat 'docker push iersinyavas/my-application:latest'
                     }
                 }
             }
         }
 
-
-       stage('Deploy Kubernetes') {
+        stage('Deploy Kubernetes') {
             steps {
               script{
-                    kubernetesDeploy (configs: 'deploymentservice.yaml', kubeconfigId: 'kubernetes')
+                    kubernetesDeploy (configs: 'deployment-service.yaml', kubeconfigId: 'kubernetes')
               }
             }
         }
-
-
     }
 }

@@ -13,10 +13,10 @@ spec:
     spec:
       containers:
       - name: my-application
-        image: iersinyavas/my-application
+        image: iersinyavas/my-application:latest
         resources:
           limits:
-            memory: "128Mi"
+            memory: "512Mi"
             cpu: "500m"
         ports:
         - containerPort: 8081
