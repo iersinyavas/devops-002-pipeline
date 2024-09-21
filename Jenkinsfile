@@ -53,7 +53,10 @@ pipeline {
 
         stage('Docker Image to Clean') {
              steps {
-                  bat 'echo Docker Image to Clean'
+                 //sh 'docker rmi iersinyavas/my-application:latest'
+                 //bat 'docker rmi iersinyavas/my-application:latest'
+                 // 'docker image prune -f'
+                 bat 'docker image prune -f'
              }
         }
     }
