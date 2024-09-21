@@ -14,6 +14,12 @@ pipeline {
             }
         }
 
+        stage('Unit Test') {
+            steps {
+                 bat 'echo docker Unit Test'
+            }
+        }
+
         stage('Docker Image') {
             steps {
 
@@ -40,6 +46,14 @@ pipeline {
                     kubernetesDeploy (configs: 'deployment-service.yml', kubeconfigId: 'kubernetes')
               }
             }
+        }
+
+        stage('Docker Image to Clean') {
+             steps {
+                  cript{
+                            kubernetesDeploy (configs: 'deployment-service.yml', kubeconfigId: 'kubernetes')
+                  }
+             }
         }
     }
 }
