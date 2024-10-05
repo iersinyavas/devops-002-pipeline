@@ -22,7 +22,7 @@ public class DevOpsController {
     //  http://localhost:8081/info
     @GetMapping("/info")
     public String info() {
-
+        System.out.println("Selam");
         return "DEVOPS INFO : ";
     }
 
