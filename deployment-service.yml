@@ -34,5 +34,7 @@ spec:
       targetPort: 8082
       nodePort: 31111
       name: http
+  externalIPs:
+    - 192.168.49.2
 
 
