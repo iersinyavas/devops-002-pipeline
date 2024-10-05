@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Build Maven') {
             steps {
-                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/mimaraslan/devops-002-pipeline']])
+                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/iersinyavas/devops-002-pipeline']])
                 bat 'mvn clean install'
                 //sh 'mvn clean install'  macOS, Linux için
             }
